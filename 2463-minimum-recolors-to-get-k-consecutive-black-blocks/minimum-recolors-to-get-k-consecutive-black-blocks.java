@@ -1,29 +1,21 @@
 class Solution {
     public int minimumRecolors(String blocks, int k) {
-        int low = 0;
-        int count = 0;
-        int res = Integer.MAX_VALUE;
-
-        for (int high = 0; high < blocks.length(); high++) {
-
-            // Add new element
-            if (blocks.charAt(high) == 'W') {
-                count++;
-            }
-
-            // Window size becomes k
-            if (high - low + 1 == k) {
-                res = Math.min(res, count);
-
-                // Remove element going out
-                if (blocks.charAt(low) == 'W') {
-                    count--;
-                }
-
-                low++;
+        int count_w = 0;
+        for(int i = 0 ; i < k ; i++){
+            if(blocks.charAt(i) == 'W'){
+                count_w++;
             }
         }
-
-        return res;
+        int ans = count_w;
+        for(int i = k ; i < blocks.length() ; i++){
+            if(blocks.charAt(i - k) == 'W'){
+                count_w--;
+            }
+            if(blocks.charAt(i) == 'W'){
+                count_w++;
+            }
+            ans = Math.min(ans , count_w);
+        }
+        return ans;
     }
 }
