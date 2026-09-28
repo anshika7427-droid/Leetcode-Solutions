@@ -6,28 +6,24 @@ public class Solution {
     }
 
     private String helper(String s) {
-        StringBuilder res = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int k = 0;
-
-        while (i < s.length()) {
-            char c = s.charAt(i);
-
-            if (Character.isDigit(c)) {
-                k = k * 10 + (c - '0');
-            } else if (c == '[') {
+        while(i < s.length()){
+            char ch = s.charAt(i);
+            if(Character.isDigit(ch)){
+                k = k * 10 + ( ch - '0');
+            }else if(ch == '['){
                 i++;
-                String subRes = helper(s);
-                while (k-- > 0) res.append(subRes);
+                String substr = helper(s);
+                while(k-- > 0) sb.append(substr);
                 k = 0;
-            } else if (c == ']') {
-                return res.toString();
-            } else {
-                res.append(c);
+            }else if(ch == ']'){
+                return sb.toString();
+            }else{
+                sb.append(ch);
             }
-
             i++;
         }
-
-        return res.toString();
+        return sb.toString();
     }
 }
